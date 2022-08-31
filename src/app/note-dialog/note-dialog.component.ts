@@ -1,3 +1,4 @@
+import { ExistingNote } from './../note/note';
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Note } from '../note/note';
@@ -8,7 +9,7 @@ export interface NoteDialogData {
 }
 
 export interface NoteDialogResult {
-  note: Note;
+  note: ExistingNote;
   delete?: boolean;
 }
 
@@ -52,6 +53,6 @@ export class NoteDialogComponent {
   cancel(): void {
     this.data.note.title = this.backupNote.title;
     this.data.note.description = this.backupNote.description;
-    this.dialogRef.close(this.data.action === 'edit' ? this.data : null);
+    this.dialogRef.close(this.data);
   }
 }

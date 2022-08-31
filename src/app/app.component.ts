@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
-import { Note } from './note/note';
+import { NotesService } from './notes.service';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { DocumentData, QuerySnapshot } from '@angular/fire/firestore';
+
+import { Note, ExistingNote } from './note/note';
 import { NoteDialogComponent, NoteDialogResult } from './note-dialog/note-dialog.component';
 
 @Component({
@@ -8,19 +11,32 @@ import { NoteDialogComponent, NoteDialogResult } from './note-dialog/note-dialog
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  notes: Note[] = [
-    {
-      title: 'First note',
-      description: 'This is my first note',
-    },
-    {
-      title: 'Second note',
-      description: 'This is my second note',
-    }
-  ];
+export class AppComponent implements OnInit {
+  notes: Note[] | any = [];
 
-  constructor(private dialog: MatDialog) { }
+  constructor(
+    private dialog: MatDialog,
+    private notesService: NotesService,
+  ) { }
+
+  ngOnInit(): void {
+    this.get();
+    this.notesService.obsr_UpdatedSnapshot.subscribe((snapshot) => {
+      this.updateNoteCollection(snapshot);
+    })
+  }
+
+  async get() {
+    const snapshot = await this.notesService.getNotes();
+    this.updateNoteCollection(snapshot);
+  }
+
+  updateNoteCollection(snapshot: QuerySnapshot<DocumentData>) {
+    this.notes = [];
+    snapshot.docs.forEach((note) => {
+      this.notes.push({ ...note.data(), id: note.id });
+    })
+  }
 
   newNote(): void {
     const dialogRef = this.dialog.open(NoteDialogComponent, {
@@ -34,10 +50,11 @@ export class AppComponent {
     dialogRef
       .afterClosed()
       .subscribe((result: NoteDialogResult | undefined | null) => {
-        if (!result) {
+        if (!result || !result.note?.title) {
           return;
         }
-        this.notes.push(result.note);
+        const note: Note = result.note;
+        this.notesService.addNote(note.title, note.description);
       });
   }
 
@@ -56,11 +73,11 @@ export class AppComponent {
         if (!result) {
           return;
         }
-        const noteIndex = this.notes.indexOf(note);
+        const note: ExistingNote = result.note;
         if (result.delete) {
-          this.notes.splice(noteIndex, 1);
+          this.notesService.deleteNote(note.id);
         } else {
-          this.notes[noteIndex] = note;
+          this.notesService.updateNote(note.id, note.title, note.description);
         }
       });
   }
