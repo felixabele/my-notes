@@ -1,5 +1,6 @@
 import { Checklist, ChecklistItem } from './../widget';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { uuidv4 } from '@firebase/util';
 
 @Component({
   selector: 'app-checklist',
@@ -11,6 +12,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
         (delete)="onDeleteChecklistItem($event)"
       ></app-checkbox>
     </div>
+    <button (click)="onAdd()" mat-icon-button>
+      <mat-icon>add</mat-icon>
+      Add Item
+    </button>
   `,
 })
 export class ChecklistComponent {
@@ -32,4 +37,15 @@ export class ChecklistComponent {
 
     this.updateChecklist.emit({ ...this.checklist, items: updatedChecklistItems })
   }
+
+  onAdd(): void {
+    const newChecklistItem: ChecklistItem = {
+      id: uuidv4(),
+      title: 'New todo',
+      done: false,
+    };
+    this.checklist.items.push(newChecklistItem);
+    this.updateChecklist.emit(this.checklist);
+  }
 }
+
