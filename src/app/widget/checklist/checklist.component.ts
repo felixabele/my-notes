@@ -12,15 +12,22 @@ import { uuidv4 } from '@firebase/util';
         (delete)="onDeleteChecklistItem($event)"
       ></app-checkbox>
     </div>
-    <button (click)="onAdd()" mat-icon-button>
+
+    <button (click)="onAdd()" mat-button>
       <mat-icon>add</mat-icon>
       Add Item
+    </button>
+
+    <button (click)="onDeleteChecklist()" mat-button>
+      <mat-icon>delete</mat-icon>
+      Delete List
     </button>
   `,
 })
 export class ChecklistComponent {
   @Input() checklist!: Checklist;
   @Output() updateChecklist = new EventEmitter<Checklist>();
+  @Output() deleteChecklist = new EventEmitter<Checklist>();
 
   onUpdateChecklist(checklistItem: ChecklistItem): void {
     const updatedChecklistItems:ChecklistItem[] = this.checklist.items.map((item) => (
@@ -28,6 +35,10 @@ export class ChecklistComponent {
     ));
 
     this.updateChecklist.emit({ ...this.checklist, items: updatedChecklistItems })
+  }
+
+  onDeleteChecklist(): void {
+    this.deleteChecklist.emit(this.checklist);
   }
 
   onDeleteChecklistItem(checklistItem: ChecklistItem): void {

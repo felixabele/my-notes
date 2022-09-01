@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Note } from './../../note/note';
+import { ExistingNote } from './../../note/note';
 import { Widget, Widgets } from './../widget';
 import { NotesService } from './../../notes.service';
 
@@ -11,24 +11,29 @@ import { NotesService } from './../../notes.service';
         *ngSwitchCase="'checklist'"
         [checklist]="widget"
         (updateChecklist)="onUpdateWidget($event)"
+        (deleteChecklist)="onDeleteWidget($event)"
       ></app-checklist>
     </div>
   `,
 })
 export class WidgetComponent {
   @Input() widget!: Widget;
-  @Input() note!: Note;
+  @Input() note!: ExistingNote;
 
   constructor(private notesService: NotesService) { }
 
   onUpdateWidget(updatedWidget: Widget): void {
-    if (!this.note.id) {
-      return;
-    }
-
     const widgets: Widgets | [] = this.note.widgets || [];
     const updatedWidgets: Widgets = widgets.map((widget) => (
       widget.id === updatedWidget.id ? updatedWidget : widget
+    ));
+    this.notesService.updateWidgets(this.note.id, updatedWidgets);
+  }
+
+  onDeleteWidget(deleteWidget: Widget): void {
+    const widgets: Widgets | [] = this.note.widgets || [];
+    const updatedWidgets: Widgets = widgets.filter((widget) => (
+      widget.id !== deleteWidget.id
     ));
     this.notesService.updateWidgets(this.note.id, updatedWidgets);
   }

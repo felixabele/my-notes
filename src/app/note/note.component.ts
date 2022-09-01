@@ -1,7 +1,7 @@
 import { NotesService } from './../notes.service';
 import { Widget, Widgets } from './../widget/widget';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Note } from './note';
+import { Note, ExistingNote } from './note';
 
 @Component({
   selector: 'app-note',
@@ -28,7 +28,7 @@ import { Note } from './note';
   ]
 })
 export class NoteComponent {
-  @Input() note: Note | null = null;
+  @Input() note: ExistingNote | null = null;
   @Output() edit = new EventEmitter<Note>();
 
   constructor(private notesService: NotesService) {}
