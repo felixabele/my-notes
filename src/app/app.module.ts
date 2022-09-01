@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { AppComponent } from './app.component';
 import { NoteComponent } from './note/note.component';
@@ -16,12 +17,16 @@ import { NoteDialogComponent } from './note-dialog/note-dialog.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { NoteMenuComponent } from './note-menu/note-menu.component';
+import { ChecklistComponent } from './widget/checklist/checklist.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NoteComponent,
-    NoteDialogComponent
+    NoteDialogComponent,
+    NoteMenuComponent,
+    ChecklistComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +38,7 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
     MatButtonModule,
     MatDialogModule,
     MatInputModule,
+    MatMenuModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
   ],

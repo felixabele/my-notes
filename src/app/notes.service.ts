@@ -1,3 +1,4 @@
+import { Widgets } from './widget/widget';
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { Firestore, getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, DocumentData, CollectionReference, onSnapshot, QuerySnapshot } from 'firebase/firestore'
@@ -35,7 +36,7 @@ export class NotesService {
   async addNote(title: string, description: string) {
     await addDoc(this.notesCol, {
       title,
-      description
+      description,
     })
     return;
   }
@@ -49,6 +50,12 @@ export class NotesService {
   async updateNote(id: string, title?: string, description?: string) {
     const docRef = doc(this.db, this.dbName, id);
     await updateDoc(docRef, { title, description })
+    return;
+  }
+
+  async updateWidgets(id: string, widgets: Widgets) {
+    const docRef = doc(this.db, this.dbName, id);
+    await updateDoc(docRef, { widgets })
     return;
   }
 }
