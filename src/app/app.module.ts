@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { AppComponent } from './app.component';
 import { NoteComponent } from './note/note.component';
@@ -19,6 +20,8 @@ import { environment } from '../environments/environment';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { NoteMenuComponent } from './note-menu/note-menu.component';
 import { ChecklistComponent } from './widget/checklist/checklist.component';
+import { WidgetComponent } from './widget/widget/widget.component';
+import { CheckboxComponent } from './widget/checkbox/checkbox.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,9 @@ import { ChecklistComponent } from './widget/checklist/checklist.component';
     NoteComponent,
     NoteDialogComponent,
     NoteMenuComponent,
-    ChecklistComponent
+    ChecklistComponent,
+    WidgetComponent,
+    CheckboxComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +44,7 @@ import { ChecklistComponent } from './widget/checklist/checklist.component';
     MatDialogModule,
     MatInputModule,
     MatMenuModule,
+    MatCheckboxModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
   ],

@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Checklist, ChecklistItem } from './../widget';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-checklist',
   template: `
-    <p>
-      checklist works!
-    </p>
+    <div *ngFor="let item of checklist.items">
+      <app-checkbox [item]="item" (update)="onUpdateChecklist($event)"></app-checkbox>
+    </div>
   `,
-  styles: [
-  ]
 })
-export class ChecklistComponent implements OnInit {
+export class ChecklistComponent {
+  @Input() checklist!: Checklist;
+  @Output() updateChecklist = new EventEmitter<Checklist>();
 
-  constructor() { }
+  onUpdateChecklist(checklistItem: ChecklistItem): void {
+    const updatedChecklistItems:ChecklistItem[] = this.checklist.items.map((item) => (
+      item.id === checklistItem.id ? checklistItem : item
+    ));
 
-  ngOnInit(): void {
+    this.updateChecklist.emit({ ...this.checklist, items: updatedChecklistItems })
   }
-
 }

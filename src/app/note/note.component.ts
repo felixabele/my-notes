@@ -16,6 +16,9 @@ import { Note } from './note';
       </mat-card-title>
       <mat-card-content>
         {{ note.description }}
+
+        <app-widget *ngFor="let widget of note.widgets" [widget]="widget" [note]="note">
+        </app-widget>
       </mat-card-content>
     </mat-card>
   `,
@@ -30,7 +33,7 @@ export class NoteComponent {
 
   constructor(private notesService: NotesService) {}
 
-  async onAddWidget(widget: Widget): Promise<void> {
+  onAddWidget(widget: Widget): void {
     if (!this.note || !this.note.id) {
       return;
     }
