@@ -21,9 +21,9 @@ import { Note } from './note';
         </app-widget>
       </mat-card-content>
     </mat-card>
+    <br />
   `,
   styles: [
-    '.item { margin-top: 1rem; }',
     '.item__menu { float: right }'
   ]
 })
