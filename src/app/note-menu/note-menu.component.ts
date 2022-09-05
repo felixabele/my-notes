@@ -9,6 +9,10 @@ import { Checklist, ChecklistItem } from '../widget/widget';
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
+      <button (click)="edit.emit()" mat-menu-item>
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
       <button (click)="onAddChecklist()" mat-menu-item>
         <mat-icon>check-box</mat-icon>
         <span>Add Checklist</span>
@@ -20,6 +24,7 @@ import { Checklist, ChecklistItem } from '../widget/widget';
 })
 export class NoteMenuComponent {
   @Output() addWidget = new EventEmitter<Checklist>();
+  @Output() edit = new EventEmitter<Checklist>();
 
   onAddChecklist(): void {
     const sampleChecklistItem: ChecklistItem = {
@@ -35,5 +40,4 @@ export class NoteMenuComponent {
 
     this.addWidget.emit(sampleChecklist);
   }
-
 }

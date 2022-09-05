@@ -12,6 +12,7 @@ import { Note, ExistingNote } from './note';
         <app-note-menu
           class="item__menu"
           (addWidget)="onAddWidget($event)"
+          (edit)="edit.emit(note)"
         ></app-note-menu>
       </mat-card-title>
       <mat-card-content>
