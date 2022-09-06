@@ -22,6 +22,7 @@ import { NoteMenuComponent } from './note-menu/note-menu.component';
 import { ChecklistComponent } from './widget/checklist/checklist.component';
 import { WidgetComponent } from './widget/widget/widget.component';
 import { CheckboxComponent } from './widget/checkbox/checkbox.component';
+import { RichTextComponent } from './widget/rich-text/rich-text.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CheckboxComponent } from './widget/checkbox/checkbox.component';
     NoteMenuComponent,
     ChecklistComponent,
     WidgetComponent,
-    CheckboxComponent
+    CheckboxComponent,
+    RichTextComponent
   ],
   imports: [
     BrowserModule,

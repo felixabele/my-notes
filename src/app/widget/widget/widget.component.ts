@@ -1,24 +1,29 @@
 import { Component, Input } from '@angular/core';
 import { ExistingNote } from './../../note/note';
-import { Widget, Widgets } from './../widget';
+import { Widget, Widgets, WidgetTypes } from './../widget';
 import { NotesService } from './../../notes.service';
 
 @Component({
   selector: 'app-widget',
   template: `
-    <div [ngSwitch]="widget.type">
+    <div>
       <app-checklist
-        *ngSwitchCase="'checklist'"
+        *ngIf="widget.type == WidgetTypes.CHECKLIST"
         [checklist]="widget"
         (updateChecklist)="onUpdateWidget($event)"
         (deleteChecklist)="onDeleteWidget($event)"
       ></app-checklist>
+
+      <app-rich-text
+        *ngIf="widget.type == WidgetTypes.RICH_TEXT"
+      ></app-rich-text>
     </div>
   `,
 })
 export class WidgetComponent {
   @Input() widget!: Widget;
   @Input() note!: ExistingNote;
+  WidgetTypes = WidgetTypes;
 
   constructor(private notesService: NotesService) { }
 
