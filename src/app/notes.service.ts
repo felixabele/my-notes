@@ -37,6 +37,7 @@ export class NotesService {
     await addDoc(this.notesCol, {
       title,
       description,
+      visible: true,
     })
     return;
   }
@@ -47,9 +48,9 @@ export class NotesService {
     return;
   }
 
-  async updateNote(id: string, title?: string, description?: string) {
+  async updateNote(id: string, title?: string, description?: string, visible?: boolean) {
     const docRef = doc(this.db, this.dbName, id);
-    await updateDoc(docRef, { title, description })
+    await updateDoc(docRef, { title, description, visible })
     return;
   }
 

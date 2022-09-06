@@ -13,7 +13,7 @@ import { uuidv4 } from '@firebase/util';
       ></app-checkbox>
     </div>
 
-    <button (click)="onAdd()" mat-icon-button>
+    <button (click)="onAdd()" mat-button>
       <mat-icon>add</mat-icon>
       Add Item
     </button>
