@@ -14,7 +14,7 @@ import { Note, ExistingNote } from './note';
     >
       <mat-card-title class="title">
         <span>{{ note.title }}</span>
-        <span class="spacer"></span>
+        <span class="title__spacer"></span>
         <app-note-menu
           class="item__menu"
           (addWidget)="onAddWidget($event)"
@@ -34,8 +34,8 @@ import { Note, ExistingNote } from './note';
     <br />
   `,
   styles: [
-    '.spacer { flex: 1 1 auto; }',
     '.title { display: flex }',
+    '.title__spacer { flex: 1 1 auto; }',
     '.visible .icon-hidden { display: none }',
     '.visible .icon-visible { display: inline }',
     '.hidden .icon-hidden { display: inline }',
