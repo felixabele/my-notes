@@ -7,6 +7,7 @@ import { NotesService } from './../../notes.service';
   selector: 'app-widget',
   template: `
     <div>
+      <mat-divider></mat-divider>
       <app-checklist
         *ngIf="widget.type == WidgetTypes.CHECKLIST"
         [checklist]="widget"
@@ -21,6 +22,9 @@ import { NotesService } from './../../notes.service';
       ></app-rich-text>
     </div>
   `,
+  styles: [
+    '.mat-divider { margin: 1rem 0 }',
+  ],
 })
 export class WidgetComponent {
   @Input() widget!: Widget;

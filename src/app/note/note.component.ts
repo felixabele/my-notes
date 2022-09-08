@@ -9,12 +9,11 @@ import { Note, ExistingNote } from './note';
     <mat-card
       class="item"
       *ngIf="note"
-      (dblclick)="edit.emit(note)"
       [ngClass]="{ visible: note.visible, hidden: !note.visible }"
     >
-      <mat-card-title class="title">
+      <mat-card-title class="note-title">
         <span>{{ note.title }}</span>
-        <span class="title__spacer"></span>
+        <span class="note-title__spacer"></span>
         <app-note-menu
           class="item__menu"
           (addWidget)="onAddWidget($event)"
@@ -34,8 +33,8 @@ import { Note, ExistingNote } from './note';
     <br />
   `,
   styles: [
-    '.title { display: flex }',
-    '.title__spacer { flex: 1 1 auto; }',
+    '.note-title { display: flex; }',
+    '.note-title__spacer { flex: 1 1 auto; }',
     '.visible .icon-hidden { display: none }',
     '.visible .icon-visible { display: inline }',
     '.hidden .icon-hidden { display: inline }',

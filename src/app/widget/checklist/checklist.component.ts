@@ -13,16 +13,22 @@ import { uuidv4 } from '@firebase/util';
       ></app-checkbox>
     </div>
 
-    <button (click)="onAdd()" mat-button>
-      <mat-icon>add</mat-icon>
-      Add Item
-    </button>
+    <div class="buttons">
+      <button (click)="onAdd()" mat-button mat-stroked-button>
+        <mat-icon>add</mat-icon>
+        Add Item
+      </button>
 
-    <button (click)="onDeleteChecklist()" mat-button>
-      <mat-icon>delete</mat-icon>
-      Delete List
-    </button>
+      <button (click)="onDeleteChecklist()" mat-button mat-stroked-button>
+        <mat-icon>delete</mat-icon>
+        Delete List
+      </button>
+    </div>
   `,
+  styles: [
+    '.buttons { text-align: right; }',
+    '.buttons button { margin-left: 1rem; }',
+  ],
 })
 export class ChecklistComponent {
   @Input() checklist!: Checklist;

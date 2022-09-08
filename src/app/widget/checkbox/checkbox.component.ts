@@ -5,18 +5,17 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild }
   selector: 'app-checkbox',
   template: `
     <div class="checklist-item" #checklistItem>
-      <mat-checkbox [(ngModel)]="done" (change)="onChange()">
-      </mat-checkbox>
-      <input type="text" [(ngModel)]="title" class="title-input" (blur)="onStopEditing()" />
-      <button (click)="onDelete()" mat-icon-button class="checklist-item__delete-button">
-        <mat-icon>close</mat-icon>
-      </button>
+      <span>
+        <mat-checkbox [(ngModel)]="done" (change)="onChange()"></mat-checkbox>
+        <input type="text" [(ngModel)]="title" class="title-input" (blur)="onStopEditing()" />
+      </span>
+      <mat-icon (click)="onDelete()" class="checklist-item__delete-button">close</mat-icon>
     </div>
   `,
   styles: [
-    '.checklist-item__delete-button { float: right; display: none }',
-    '.checklist-item:hover > .checklist-item__delete-button { display: block }',
+    '.checklist-item { display: flex; justify-content: space-between; }',
     '.mat-checkbox { margin-right: 1rem; }',
+    '.mat-icon { font-size: 18px; line-height: 18px; cursor: pointer; }',
     '.title-input { border: 0; outline: none }',
   ]
 })

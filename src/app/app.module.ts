@@ -11,6 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDividerModule } from '@angular/material/divider';
 import { NgxEditorModule } from 'ngx-editor';
 
 import { AppComponent } from './app.component';
@@ -49,6 +50,7 @@ import { RichTextComponent } from './widget/rich-text/rich-text.component';
     MatInputModule,
     MatMenuModule,
     MatCheckboxModule,
+    MatDividerModule,
     NgxEditorModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
