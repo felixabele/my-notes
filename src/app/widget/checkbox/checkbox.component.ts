@@ -1,10 +1,10 @@
 import { ChecklistItem } from './../widget';
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-checkbox',
   template: `
-    <div class="checklist-item" #checklistItem>
+    <div class="checklist-item" [ngClass]="{ 'checklist-item__done': item.done }">
       <span>
         <mat-checkbox [(ngModel)]="done" (change)="onChange()"></mat-checkbox>
         <input type="text" [(ngModel)]="title" class="title-input" (blur)="onStopEditing()" />
@@ -14,6 +14,8 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild }
   `,
   styles: [
     '.checklist-item { display: flex; justify-content: space-between; }',
+    '.checklist-item:hover input { font-weight: bold; }',
+    '.checklist-item__done input { text-decoration: line-through; color: grey; }',
     '.mat-checkbox { margin-right: 1rem; }',
     '.mat-icon { font-size: 18px; line-height: 18px; cursor: pointer; }',
     '.title-input { border: 0; outline: none }',
@@ -23,8 +25,6 @@ export class CheckboxComponent implements OnInit {
   @Input() item!: ChecklistItem;
   @Output() update = new EventEmitter<ChecklistItem>();
   @Output() delete = new EventEmitter<ChecklistItem>();
-  @ViewChild('titleInput') titleInput: ElementRef<HTMLInputElement> | undefined;
-  @ViewChild('checklistItem') checklistItem: ElementRef<HTMLInputElement> | undefined;
 
   done: boolean = false;
   title: string = '';

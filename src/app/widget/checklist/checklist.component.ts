@@ -5,7 +5,15 @@ import { uuidv4 } from '@firebase/util';
 @Component({
   selector: 'app-checklist',
   template: `
-    <div *ngFor="let item of checklist.items">
+    <div *ngFor="let item of pendingItems()">
+      <app-checkbox
+        [item]="item"
+        (update)="onUpdateChecklist($event)"
+        (delete)="onDeleteChecklistItem($event)"
+      ></app-checkbox>
+    </div>
+
+    <div *ngFor="let item of doneItems()" class="done-items-list">
       <app-checkbox
         [item]="item"
         (update)="onUpdateChecklist($event)"
@@ -34,6 +42,14 @@ export class ChecklistComponent {
   @Input() checklist!: Checklist;
   @Output() updateChecklist = new EventEmitter<Checklist>();
   @Output() deleteChecklist = new EventEmitter<Checklist>();
+
+  doneItems(): ChecklistItem[] {
+    return this.checklist.items.filter(({ done }) => done);
+  }
+
+  pendingItems(): ChecklistItem[] {
+    return this.checklist.items.filter(({ done }) => !done);
+  }
 
   onUpdateChecklist(checklistItem: ChecklistItem): void {
     const updatedChecklistItems:ChecklistItem[] = this.checklist.items.map((item) => (
