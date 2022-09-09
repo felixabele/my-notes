@@ -23,14 +23,22 @@ import { FormGroup, FormControl } from '@angular/forms';
         [innerHTML]="html"
       >
       </div>
+
+      <div class="buttons">
+        <app-icon-link (click)="onDeleteRichText()" icon="delete">
+          Delete Rich-Text
+        </app-icon-link>
+      </div>
     </div>
   `,
   styles: [
-  ]
+    '.buttons { display: flex; justify-content: flex-end; margin-top: 1rem; }',
+  ],
 })
 export class RichTextComponent implements OnInit, OnDestroy {
   @Input() richText!: RichText;
   @Output() updateRichText = new EventEmitter<RichText>();
+  @Output() deleteRichText = new EventEmitter<RichText>();
   active: boolean = false;
   editor: Editor | null = null;
   html: string = '';
@@ -56,6 +64,10 @@ export class RichTextComponent implements OnInit, OnDestroy {
         .focus()
         .exec();
     })
+  }
+
+  onDeleteRichText(): void {
+    this.deleteRichText.emit(this.richText);
   }
 
   deactivateEditor(): void {

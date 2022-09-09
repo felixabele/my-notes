@@ -19,6 +19,7 @@ import { NotesService } from './../../notes.service';
         *ngIf="widget.type == WidgetTypes.RICH_TEXT"
         [richText]="widget"
         (updateRichText)="onUpdateWidget($event)"
+        (deleteRichText)="onDeleteWidget($event)"
       ></app-rich-text>
     </div>
   `,
