@@ -25,6 +25,7 @@ import { ChecklistComponent } from './widget/checklist/checklist.component';
 import { WidgetComponent } from './widget/widget/widget.component';
 import { CheckboxComponent } from './widget/checkbox/checkbox.component';
 import { RichTextComponent } from './widget/rich-text/rich-text.component';
+import { IconLinkComponent } from './icon-link/icon-link.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { RichTextComponent } from './widget/rich-text/rich-text.component';
     ChecklistComponent,
     WidgetComponent,
     CheckboxComponent,
-    RichTextComponent
+    RichTextComponent,
+    IconLinkComponent,
   ],
   imports: [
     BrowserModule,

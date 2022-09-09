@@ -19,12 +19,12 @@ import { Note, ExistingNote } from './note';
           (addWidget)="onAddWidget($event)"
           (edit)="edit.emit(note)"
         ></app-note-menu>
-        <button (click)="onToggleVisibility()" mat-button>
+        <a (click)="onToggleVisibility()">
           <mat-icon class="icon-visible">visibility</mat-icon>
           <mat-icon class="icon-hidden">visibility_off</mat-icon>
-        </button>
+        </a>
       </mat-card-title>
-      <mat-card-content class="note-details">
+      <mat-card-content>
         {{ note.description }}
         <app-widget *ngFor="let widget of note.widgets" [widget]="widget" [note]="note">
         </app-widget>
@@ -39,7 +39,9 @@ import { Note, ExistingNote } from './note';
     '.visible .icon-visible { display: inline }',
     '.hidden .icon-hidden { display: inline }',
     '.hidden .icon-visible { display: none }',
-    '.hidden .note-details { display: none }',
+    '.hidden mat-card-content { display: none }',
+    'a { cursor: pointer; }',
+    '.mat-card-title { margin-bottom: 0 }',
   ]
 })
 export class NoteComponent {

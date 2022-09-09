@@ -10,6 +10,7 @@ import { uuidv4 } from '@firebase/util';
         [item]="item"
         (update)="onUpdateChecklist($event)"
         (delete)="onDeleteChecklistItem($event)"
+        (keydown.enter)="onAdd()"
       ></app-checkbox>
     </div>
 
@@ -22,20 +23,18 @@ import { uuidv4 } from '@firebase/util';
     </div>
 
     <div class="buttons">
-      <button (click)="onAdd()" mat-button mat-stroked-button>
-        <mat-icon>add</mat-icon>
+      <app-icon-link (click)="onAdd()" icon="add">
         Add Item
-      </button>
+      </app-icon-link>
 
-      <button (click)="onDeleteChecklist()" mat-button mat-stroked-button>
-        <mat-icon>delete</mat-icon>
+      <app-icon-link (click)="onDeleteChecklist()" icon="delete">
         Delete List
-      </button>
+      </app-icon-link>
     </div>
   `,
   styles: [
-    '.buttons { text-align: right; }',
-    '.buttons button { margin-left: 1rem; }',
+    '.buttons { display: flex; justify-content: flex-end; margin-top: 1rem; }',
+    '.buttons app-icon-link { margin-left: 1rem; }',
   ],
 })
 export class ChecklistComponent {

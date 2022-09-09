@@ -5,9 +5,9 @@ import { Checklist, ChecklistItem, RichText, Widget, WidgetTypes } from '../widg
 @Component({
   selector: 'app-note-menu',
   template: `
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <a [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
-    </button>
+    </a>
     <mat-menu #menu="matMenu">
       <button (click)="edit.emit()" mat-menu-item>
         <mat-icon>edit</mat-icon>
@@ -24,6 +24,7 @@ import { Checklist, ChecklistItem, RichText, Widget, WidgetTypes } from '../widg
     </mat-menu>
   `,
   styles: [
+    'a { cursor: pointer; margin-right: 1rem; }',
   ]
 })
 export class NoteMenuComponent {
