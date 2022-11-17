@@ -1,6 +1,6 @@
 import { RichText } from './../widget';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Editor, Validators } from 'ngx-editor';
+import { Editor, Toolbar, Validators } from 'ngx-editor';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -8,7 +8,10 @@ import { FormGroup, FormControl } from '@angular/forms';
   template: `
     <div class="richt-text-widget" *ngIf="editor">
       <form [formGroup]="form" *ngIf="active">
-        <ngx-editor-menu [editor]="editor"></ngx-editor-menu>
+        <ngx-editor-menu
+         [editor]="editor"
+         [toolbar] = "toolbar"
+        ></ngx-editor-menu>
         <ngx-editor
           [editor]="editor"
           (focusOut)="deactivateEditor()"
@@ -20,7 +23,7 @@ import { FormGroup, FormControl } from '@angular/forms';
       <div
         *ngIf="!active"
         (click)="activateEditor()"
-        [innerHTML]="html"
+        [innerHTML]="html | safeHtml"
       >
       </div>
 
@@ -42,6 +45,16 @@ export class RichTextComponent implements OnInit, OnDestroy {
   active: boolean = false;
   editor: Editor | null = null;
   html: string = '';
+
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['text_color'],
+    ['horizontal_rule', 'format_clear'],
+  ];
 
   form = new FormGroup({
     editorContent: new FormControl('', Validators.required()),
