@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Checklist, ChecklistItem, RichText, Widget, WidgetTypes } from '../widget/widget';
+import { Checklist, ChecklistItem, Link, RichText, Widget, WidgetTypes } from '../widget/widget';
 
 @Component({
   selector: 'app-note-menu',
@@ -20,6 +20,10 @@ import { Checklist, ChecklistItem, RichText, Widget, WidgetTypes } from '../widg
       <button (click)="onAddRichText()" mat-menu-item>
         <mat-icon>edit_note</mat-icon>
         <span>Add Text</span>
+      </button>
+      <button (click)="onAddLink()" mat-menu-item>
+        <mat-icon>link</mat-icon>
+        <span>Add Link</span>
       </button>
     </mat-menu>
   `,
@@ -54,5 +58,16 @@ export class NoteMenuComponent {
     };
 
     this.addWidget.emit(sampleRichText);
+  }
+
+    onAddLink(): void {
+    const sampleLink: Link = {
+      id: uuidv4(),
+      type: WidgetTypes.LINK,
+      title: '',
+      url: '',
+    };
+
+    this.addWidget.emit(sampleLink);
   }
 }

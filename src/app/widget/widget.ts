@@ -1,6 +1,7 @@
 export enum WidgetTypes {
   CHECKLIST = 'checklist',
   RICH_TEXT = 'richText',
+  LINK = 'link',
 }
 
 export interface ChecklistItem {
@@ -21,5 +22,12 @@ export interface RichText {
   html: string;
 }
 
-export type Widget = (Checklist | RichText)
+export interface Link {
+  id: string;
+  type: WidgetTypes.LINK;
+  url: string;
+  title?: string;
+}
+
+export type Widget = (Checklist | RichText | Link)
 export type Widgets = Widget[]

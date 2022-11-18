@@ -27,6 +27,7 @@ import { CheckboxComponent } from './widget/checkbox/checkbox.component';
 import { RichTextComponent } from './widget/rich-text/rich-text.component';
 import { IconLinkComponent } from './icon-link/icon-link.component';
 import { SafeHtmlPipe } from './safe-html.pipe';
+import { LinkComponent } from './widget/link/link.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { SafeHtmlPipe } from './safe-html.pipe';
     RichTextComponent,
     IconLinkComponent,
     SafeHtmlPipe,
+    LinkComponent,
   ],
   imports: [
     BrowserModule,

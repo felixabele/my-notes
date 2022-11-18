@@ -21,6 +21,13 @@ import { NotesService } from './../../notes.service';
         (updateRichText)="onUpdateWidget($event)"
         (deleteRichText)="onDeleteWidget($event)"
       ></app-rich-text>
+
+      <app-link
+        *ngIf="widget.type == WidgetTypes.LINK"
+        [link]="widget"
+        (updateLink)="onUpdateWidget($event)"
+        (deleteLink)="onDeleteWidget($event)"
+      ></app-link>
     </div>
   `,
   styles: [
