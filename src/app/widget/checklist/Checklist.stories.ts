@@ -4,17 +4,19 @@ import { moduleMetadata } from '@storybook/angular';
 import { MatInput } from '@angular/material/input';
 import { MatIcon } from '@angular/material/icon';
 import { MatFormField } from '@angular/material/form-field';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { Link, WidgetTypes } from '../widget';
-import { LinkComponent } from './link.component';
+import { Checklist, WidgetTypes } from '../widget';
+import { ChecklistComponent } from './checklist.component';
+import { CheckboxComponent } from './../checkbox/checkbox.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export default {
-  title: 'Widgets/Link',
-  component: LinkComponent,
+  title: 'Widgets/Checlist',
+  component: ChecklistComponent,
   decorators: [
     moduleMetadata({
       imports: [
@@ -23,41 +25,40 @@ export default {
         BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
+        MatCheckboxModule,
       ],
-      declarations: [MatInput, MatIcon, MatFormField],
+      declarations: [MatInput, MatIcon, MatFormField, CheckboxComponent],
     }),
   ],
 
   argTypes: {
-    link: {
-      name: 'Link',
-      description: 'Representation of the Link',
+    checklist: {
+      name: 'Checklist',
+      description: 'List of checkable items',
     },
-    urlModel: {
-      name: "UrlModel"
-    }
   },
 } as Meta;
 
-const Template: Story<LinkComponent> = (args: LinkComponent) => ({
+const Template: Story<ChecklistComponent> = (args: ChecklistComponent) => ({
   props: args,
 });
 
-const sampleLink: Link = {
+const checklistSample: Checklist = {
   id: 'sampleID',
-  type: WidgetTypes.LINK,
-  url: 'https://sample.com',
-  title: 'This is a sample link',
+  type: WidgetTypes.CHECKLIST,
+  items: [
+    {
+      title: 'Go to the museum',
+      done: false,
+    },
+    {
+      title: 'Learn french',
+      done: true,
+    }
+  ],
 }
 
 export const Default = Template.bind({});
 Default.args = {
-  link: sampleLink,
-  urlModel: `${sampleLink.title}|${sampleLink.url}`
-};
-
-export const Editing = Template.bind({});
-Editing.args = {
-  ...Default.args,
-  editing: true,
+  checklist: checklistSample
 };

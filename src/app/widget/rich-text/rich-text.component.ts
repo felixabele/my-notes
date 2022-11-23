@@ -6,8 +6,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 @Component({
   selector: 'app-rich-text',
   template: `
-    <div class="richt-text-widget" *ngIf="editor">
-      <form [formGroup]="form" *ngIf="active">
+    <div class="richt-text-widget">
+      <form [formGroup]="form" *ngIf="active && editor">
         <ngx-editor-menu
          [editor]="editor"
          [toolbar] = "toolbar"
