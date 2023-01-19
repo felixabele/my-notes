@@ -4,26 +4,26 @@ import { MatDialog } from '@angular/material/dialog';
 import { DocumentData, QuerySnapshot } from '@angular/fire/firestore';
 
 import { Note, ExistingNote } from './note/note';
-import { NoteDialogComponent, NoteDialogResult } from './note-dialog/note-dialog.component';
+import {
+  NoteDialogComponent,
+  NoteDialogResult,
+} from './note-dialog/note-dialog.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
   notes: Note[] | any = [];
 
-  constructor(
-    private dialog: MatDialog,
-    private notesService: NotesService,
-  ) { }
+  constructor(private dialog: MatDialog, private notesService: NotesService) {}
 
   ngOnInit(): void {
     this.get();
     this.notesService.obsr_UpdatedSnapshot.subscribe((snapshot) => {
       this.updateNoteCollection(snapshot);
-    })
+    });
   }
 
   async get() {
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
     this.notes = [];
     snapshot.docs.forEach((note) => {
       this.notes.push({ ...note.data(), id: note.id });
-    })
+    });
   }
 
   newNote(): void {
